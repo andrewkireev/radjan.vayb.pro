@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VAYB.PRO</title>
+    <script>
+      (() => {
+        const path = window.location.pathname.replace(/\/+$/, '') || '/';
+        const titles = {
+          '/launch/drum-and-bass-master': 'Drum n Bass master-Rajan',
+          '/music-production/drum-and-bass-master': 'Drum n Bass master-vayb',
+        };
+        if (titles[path]) document.title = titles[path];
+      })();
+    </script>
+    <link rel="icon" href="/favicon.ico?v=1">
+    <script type="module" crossorigin src="/assets/index-BYo5T8Aj.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Q1LbIAG7.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
