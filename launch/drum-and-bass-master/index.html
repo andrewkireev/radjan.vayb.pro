@@ -3,22 +3,48 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VAYB.PRO</title>
+    <title>Drum and Bass Master: поток с 1 октября</title>
+    <meta name="description" content="Два месяца, четыре модуля, созвоны с разбором домашек. Эндрю Брайт и Ra Djan. Цена растёт по расписанию потока, набор до 15 октября." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="VAYB.PRO" />
+    <meta property="og:title" content="Drum and Bass Master: поток с 1 октября" />
+    <meta property="og:description" content="Два месяца, четыре модуля, созвоны с разбором домашек. Эндрю Брайт и Ra Djan. Цена растёт по расписанию потока, набор до 15 октября." />
+    <meta property="og:image" content="https://radjan.vayb.pro/media/experts/ra-djan.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
     <script>
       (() => {
         const path = window.location.pathname.replace(/\/+$/, '') || '/';
-        const titles = {
-          '/launch/drum-and-bass-master': 'Drum n Bass master-Rajan',
-          '/music-production/drum-and-bass-master': 'Drum n Bass master-vayb',
+        const pages = {
+          '/launch/drum-and-bass-master': {
+            title: 'Drum n Bass master-Rajan',
+            description: 'Поток Drum and Bass Master с 1 октября: два месяца, четыре модуля, созвоны с разбором домашек. Эндрю Брайт и Ra Djan. Цена растёт по расписанию потока.',
+            image: '/media/experts/ra-djan.webp',
+          },
+          '/music-production/drum-and-bass-master': {
+            title: 'Drum n Bass master-vayb',
+            description: 'Drum and Bass Master: 33 урока, 4 модуля, от ритма и баса до сведения и мастеринга. Solo, Practice, Master Level.',
+            image: '/media/experts/andrew-bright-portrait-v2.webp',
+          },
         };
-        if (titles[path]) document.title = titles[path];
+        const page = pages[path];
+        if (!page) return;
+        document.title = page.title;
+        const set = (selector, value) => {
+          const el = document.querySelector(selector);
+          if (el) el.setAttribute('content', value);
+        };
+        set('meta[name="description"]', page.description);
+        set('meta[property="og:title"]', page.title);
+        set('meta[property="og:description"]', page.description);
+        set('meta[property="og:image"]', window.location.origin + page.image);
       })();
     </script>
     <link rel="icon" href="/favicon.ico?v=1">
-    <script type="module" crossorigin src="/assets/index-BYo5T8Aj.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Q1LbIAG7.css">
-  </head>
+    <script type="module" crossorigin src="/assets/index-BwBE-Nrm.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-AA8EId7M.css">
+  <meta property="og:url" content="https://radjan.vayb.pro/launch/drum-and-bass-master" /></head>
   <body>
     <div id="root"></div>
+
   </body>
 </html>
