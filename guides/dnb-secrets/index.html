@@ -830,5 +830,17 @@
     videos.forEach((v) => io.observe(v));
   })();
 </script>
+<script>
+  // Цели по кликам на внешние ссылки - те же имена, что в src/lib/analytics.ts (18.09.2026).
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    var h = a ? a.getAttribute('href') || '' : '';
+    if (!h || !window.ym) return;
+    var g = /ordering\/cart/.test(h) ? 'pay_click'
+      : /form\/telegram|t\.me\/vaybpro_bot|t\.me\/vayb_psymaster_bot/.test(h) ? 'bot_click'
+      : /t\.me\/vayb_help/.test(h) ? 'ask_click' : null;
+    if (g) ym(112584610, 'reachGoal', g, {href: h, page: location.pathname});
+  }, true);
+</script>
 </body>
 </html>
