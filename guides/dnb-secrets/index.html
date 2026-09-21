@@ -277,9 +277,34 @@
   .final__pass { margin-top: clamp(28px, 3vw, 44px); display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); border: 1px solid rgba(217,255,67,0.4); background: rgba(10,11,8,0.9); box-shadow: 6px 6px 0 rgba(217,255,67,0.1); }
   .final__pass div { padding: clamp(16px, 1.8vw, 26px); border-right: 1px dashed rgba(217,255,67,0.3); }
   .final__pass div:last-child { border-right: 0; }
-  .final__pass span { display: block; margin-bottom: 8px; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--acid); }
+  .final__pass > div > span { display: block; margin-bottom: 8px; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--acid); }
+  .final__pass s { margin-left: 6px; font-family: 'Exo 2', sans-serif; font-size: 12px; font-weight: 600; color: rgba(244,240,232,0.45); text-decoration-color: var(--magenta); }
+  .final__pass s:empty { display: none; }
   .final__pass strong { font-family: 'Unbounded', sans-serif; font-size: clamp(14px, 1.2vw, 18px); line-height: 1.2; }
   @media (max-width: 720px) { .final__pass { grid-template-columns: 1fr; } .final__pass div { border-right: 0; border-bottom: 1px dashed rgba(217,255,67,0.3); } .final__pass div:last-child { border-bottom: 0; } }
+
+  /* мосты в курс после разделов (21.09.2026): до этого единственная кнопка на курс была в самом конце,
+     и на вторую страницу уходил примерно один из пяти открывших гайд */
+  .bridge { position: relative; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: clamp(28px, 3vw, 44px); padding: 16px 20px; border: 1px solid rgba(217,255,67,0.35); border-left: 4px solid var(--acid); background: rgba(13,13,13,0.82); }
+  .bridge__eyebrow { flex-basis: 100%; font-size: 10px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--acid); }
+  .bridge p { flex: 1 1 300px; margin: 0; font-size: 15px; line-height: 1.5; color: var(--muted); }
+  .btn--sm { min-height: 42px; padding: 10px 18px; font-size: 11px; }
+
+  /* липкая полоса: цена ступени и кнопка на курс, пока читаешь; плеер уезжает выше, чтобы не спорить с ней */
+  .sticky-cta { position: fixed; z-index: 25; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: space-between; gap: 10px 16px; padding: 10px max(16px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); border-top: 2px solid var(--acid); background: rgba(5,5,5,0.94); backdrop-filter: blur(8px); transition: transform 260ms ease, visibility 0s linear 0s; }
+  .sticky-cta[data-hidden="true"] { visibility: hidden; transform: translateY(110%); transition: transform 260ms ease, visibility 0s linear 260ms; }
+  .sticky-cta p { display: flex; flex-direction: column; gap: 2px; min-width: 0; margin: 0; }
+  .sticky-cta strong { font-family: 'Unbounded', sans-serif; font-size: 13px; font-weight: 800; line-height: 1.15; white-space: nowrap; }
+  .sticky-cta p > span { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--acid); white-space: nowrap; }
+  .sticky-cta__link { flex-shrink: 0; display: inline-flex; align-items: center; min-height: 44px; padding: 10px 18px; border: 2px solid var(--acid); background: var(--acid); font-family: 'Unbounded', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: #050505; box-shadow: 4px 4px 0 rgba(5,5,5,0.9), 4px 4px 0 1px var(--acid); transition: transform 160ms ease; }
+  .sticky-cta__link:hover, .sticky-cta__link:focus-visible { transform: translate(-2px, -2px); }
+  body[data-cta="visible"] .player { bottom: 78px; }
+  @media (min-width: 901px) {
+    .sticky-cta { left: auto; right: 24px; bottom: 24px; padding: 12px 14px 12px 20px; border: 2px solid var(--acid); box-shadow: 6px 6px 0 rgba(5,5,5,0.9), 6px 6px 0 1px var(--acid); }
+    .sticky-cta strong { font-size: 15px; }
+    body[data-cta="visible"] .player { bottom: 96px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .sticky-cta, .sticky-cta__link { transition: none; } }
 
   footer { position: relative; z-index: 3; border-top: 1px solid var(--hair); padding-block: 28px; font-size: 13px; color: rgba(244,240,232,0.5); }
   footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; }
@@ -343,7 +368,7 @@
 <div class="bg-grain" aria-hidden="true"></div>
 
 <header class="wrap top">
-  <a class="brand" href="https://andrewkireev.github.io/" aria-label="VAYB.PRO">VAYB.PRO<small>школа электронной музыки</small></a>
+  <a class="brand" data-cta="logo" href="/launch/drum-and-bass-master?utm_source=guide&amp;utm_medium=dnb-secrets&amp;utm_campaign=dnb2&amp;utm_content=logo" aria-label="VAYB.PRO">VAYB.PRO<small>школа электронной музыки</small></a>
   <nav aria-label="Разделы гайда">
     <a href="#drums">Барабаны</a>
     <a href="#bass">Бас</a>
@@ -482,6 +507,11 @@
           <p>Если всё сделаешь правильно, то получишь эффект “стена звука”.</p>
         </div>
       </div>
+      <aside class="bridge" aria-label="Где это в курсе">
+        <span class="bridge__eyebrow">В курсе Drum and Bass Master</span>
+        <p>Модуль 1 «Ритм и барабаны»: восемь уроков про слои, длину звука, Amen Break, сбивки и разгоны. Партию барабанов пишешь для своего трека, а не для примера.</p>
+        <a class="btn btn--sm" data-cta="drums" href="/launch/drum-and-bass-master?utm_source=guide&amp;utm_medium=dnb-secrets&amp;utm_campaign=dnb2&amp;utm_content=drums">Программа и цены</a>
+      </aside>
     </div>
   </section>
 
@@ -537,6 +567,11 @@
           <figcaption>Диалог басов</figcaption>
         </figure>
       </div>
+      <aside class="bridge" aria-label="Где это в курсе">
+        <span class="bridge__eyebrow">В курсе Drum and Bass Master</span>
+        <p>Модуль 2 «Бас и плотность»: Reese, Neuro, Glide, Cyber и как соединить несколько звуков в один плотный низ. Десять уроков, 2 часа 27 минут.</p>
+        <a class="btn btn--sm" data-cta="bass" href="/launch/drum-and-bass-master?utm_source=guide&amp;utm_medium=dnb-secrets&amp;utm_campaign=dnb2&amp;utm_content=bass">Программа и цены</a>
+      </aside>
     </div>
   </section>
 
@@ -563,6 +598,11 @@
           <figcaption>Bass face</figcaption>
         </figure>
       </div>
+      <aside class="bridge" aria-label="Где это в курсе">
+        <span class="bridge__eyebrow">В курсе Drum and Bass Master</span>
+        <p>Модуль 3 «Управление звуком и дроп»: Neuro Arp, Supersaw Pluck, эффекты для лида и лиды в духе Pendulum и Prodigy. Как мелодия живёт рядом с басом, а не поверх него.</p>
+        <a class="btn btn--sm" data-cta="melody" href="/launch/drum-and-bass-master?utm_source=guide&amp;utm_medium=dnb-secrets&amp;utm_campaign=dnb2&amp;utm_content=melody">Программа и цены</a>
+      </aside>
     </div>
   </section>
 
@@ -586,6 +626,11 @@
           <figcaption>Плотность</figcaption>
         </figure>
       </div>
+      <aside class="bridge" aria-label="Где это в курсе">
+        <span class="bridge__eyebrow">В курсе Drum and Bass Master</span>
+        <p>Компрессия в четырёх уроках, от «зачем» до многополосной, дисторшн отдельным уроком, сведение в двух частях. Всё на реальном проекте, а не на теории.</p>
+        <a class="btn btn--sm" data-cta="fx" href="/launch/drum-and-bass-master?utm_source=guide&amp;utm_medium=dnb-secrets&amp;utm_campaign=dnb2&amp;utm_content=fx">Программа и цены</a>
+      </aside>
     </div>
   </section>
 
@@ -611,6 +656,11 @@
           <figcaption>Единый организм</figcaption>
         </figure>
       </div>
+      <aside class="bridge" aria-label="Где это в курсе">
+        <span class="bridge__eyebrow">В курсе Drum and Bass Master</span>
+        <p>Склейку кика и баса доводим на созвонах потока: приносишь свой проект, слушаем вместе, что качает, а что нет. Четыре разбора домашек за два месяца.</p>
+        <a class="btn btn--sm" data-cta="sidechain" href="/launch/drum-and-bass-master?utm_source=guide&amp;utm_medium=dnb-secrets&amp;utm_campaign=dnb2&amp;utm_content=sidechain">Программа и цены</a>
+      </aside>
     </div>
   </section>
 
@@ -645,6 +695,11 @@
           <figcaption>Drop the bass</figcaption>
         </figure>
       </div>
+      <aside class="bridge" aria-label="Где это в курсе">
+        <span class="bridge__eyebrow">В курсе Drum and Bass Master</span>
+        <p>Синты и плаки в модуле 3, а в Big Start ещё бонус «Секреты синтеза»: 27 уроков по Serum, Vital и Phase Plant.</p>
+        <a class="btn btn--sm" data-cta="synths" href="/launch/drum-and-bass-master?utm_source=guide&amp;utm_medium=dnb-secrets&amp;utm_campaign=dnb2&amp;utm_content=synths">Программа и цены</a>
+      </aside>
     </div>
   </section>
 
@@ -679,24 +734,24 @@
     </div>
   </section>
 
-  <!-- призыв -->
+  <!-- призыв: оффер потока, цена ступени считается скриптом по лесенке (LADDER ниже) -->
   <section class="final" id="course">
     <img class="sticker" src="/stickers/crew.png" alt="" aria-hidden="true" style="--w:clamp(130px,15vw,270px);--r:-6deg;top:10%;right:2%">
     <div class="wrap">
-      <span class="eyebrow">Drum’N’Bass Master</span>
-      <h2>Всему этому ты подробно обучаем на нашем тренинге Drum’N’Bass Master!</h2>
-      <p class="lead">Почитать о нём и узнать подробности можно здесь!</p>
+      <span class="eyebrow">Drum and Bass Master · поток с 1 октября</span>
+      <h2>Всё это руками, на твоём треке: поток Drum and Bass Master</h2>
+      <p class="lead">Два месяца, четыре модуля, 33 урока. Раз в две недели созвон с разбором домашек, чат потока. Ведёт Эндрю Брайт, поток курирует Ra Djan.</p>
+      <div class="final__pass" data-ladder="pass">
+        <div><span>Старт потока</span><strong>1 октября</strong></div>
+        <div><span data-ladder="price-label">Crew Vibes сейчас</span><strong><span data-ladder="price">27 900 ₽</span> <s data-ladder="full">34 900 ₽</s></strong></div>
+        <div><span data-ladder="rise-label">Дорожает</span><strong data-ladder="rise">24 сентября</strong></div>
+      </div>
       <div class="final__actions">
-        <a class="btn" href="/launch/drum-and-bass-master?utm_source=guide&amp;utm_medium=dnb-secrets&amp;utm_campaign=dnb2">Подробности о тренинге</a>
+        <a class="btn" data-cta="final" href="/launch/drum-and-bass-master?utm_source=guide&amp;utm_medium=dnb-secrets&amp;utm_campaign=dnb2&amp;utm_content=final">Программа и цены</a>
         <a class="btn btn--ghost" href="https://t.me/vayb_help?text=%D0%92%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%B3%D0%B0%D0%B9%D0%B4%D1%83%20%C2%AB%D0%A1%D0%B5%D0%BA%D1%80%D0%B5%D1%82%D1%8B%20Drum%27N%27Bass%C2%BB" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.6 6.8-1.6 7.5c-.1.5-.4.7-.9.4l-2.4-1.8-1.2 1.1c-.1.1-.2.2-.5.2l.2-2.5 4.5-4.1c.2-.2 0-.3-.3-.1L8.9 13l-2.4-.8c-.5-.2-.5-.5.1-.8l9.3-3.6c.4-.1.8.1.7.8Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.6 6.8-1.6 7.5c-.1.5-.4.7-.9.4l-2.4-1.8-1.2 1.1c-.1.1-.2.2-.5.2l.2-2.5 4.5-4.1c.2-.2 0-.3-.3-.1L8.9 13l-2.4-.8c-.5-.2-.5-.5.1-.8l9.3-3.6c.4-.1.8.1.7.7Z"/></svg>
           Нужна помощь? Напиши нам!
         </a>
-      </div>
-      <div class="final__pass">
-        <div><span>Формат</span><strong>Тренинг Drum’N’Bass Master</strong></div>
-        <div><span>Преподаватели</span><strong>Эндрю Брайт и Ra Djan</strong></div>
-        <div><span>Школа</span><strong>VAYB.PRO</strong></div>
       </div>
     </div>
   </section>
@@ -704,11 +759,15 @@
 
 <footer>
   <div class="wrap">
-    <a href="https://andrewkireev.github.io/">VAYB.PRO</a>
+    <a data-cta="footer" href="/launch/drum-and-bass-master?utm_source=guide&amp;utm_medium=dnb-secrets&amp;utm_campaign=dnb2&amp;utm_content=footer">VAYB.PRO</a>
     <a href="mailto:vaybpro@yandex.com">vaybpro@yandex.com</a>
     <a href="#top">Наверх ↑</a>
   </div>
 </footer>
+<div class="sticky-cta" id="stickyCta" data-hidden="true" aria-hidden="true">
+  <p><strong>Crew Vibes <span data-ladder="price">27 900 ₽</span></strong><span data-ladder="rise-line">дорожает 24 сентября</span></p>
+  <a class="sticky-cta__link" data-cta="sticky" href="/launch/drum-and-bass-master?utm_source=guide&amp;utm_medium=dnb-secrets&amp;utm_campaign=dnb2&amp;utm_content=sticky" tabindex="-1">К курсу</a>
+</div>
 <div class="player" id="player" data-state="off" aria-label="Музыка на странице">
   <button class="player__toggle" id="playerToggle" type="button" aria-pressed="false" title="Включить или выключить музыку">
     <span class="player__bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
@@ -831,15 +890,70 @@
   })();
 </script>
 <script>
+  // Лесенка цен запуска: копия src/lib/launch-ladder.ts, совпадение проверяет тест
+  // src/pages/guide-ladder.test.ts. Сдвинулись даты - правим ts, yaml, скидки AWO и эту строку.
+  var LADDER = {"streamStart":"2026-10-01","closeDate":"2026-10-15","crewFull":34900,"steps":[{"from":"2026-09-09","to":"2026-09-23","crew":27900},{"from":"2026-09-24","to":"2026-09-27","crew":29700},{"from":"2026-09-28","to":"2026-10-03","crew":31400},{"from":"2026-10-04","to":"2026-10-07","crew":33200},{"from":"2026-10-08","to":"2026-10-15","crew":34900}]};
+  (function () {
+    var MONTHS = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+    function rub(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₽'; }
+    function dateRu(iso) { var p = iso.split('-'); return Number(p[2]) + ' ' + MONTHS[Number(p[1]) - 1]; }
+    var today = new Date(Date.now() + 3 * 3600 * 1000).toISOString().slice(0, 10); // по Москве, как на сайте
+    var steps = LADDER.steps, cur = steps[0], next = null;
+    for (var i = 0; i < steps.length; i++) { if (today >= steps[i].from) { cur = steps[i]; next = steps[i + 1] || null; } }
+    var closed = today > LADDER.closeDate, full = cur.crew === LADDER.crewFull;
+    function setAll(key, text) { var els = document.querySelectorAll('[data-ladder="' + key + '"]'); for (var j = 0; j < els.length; j++) els[j].textContent = text; }
+    if (closed) {
+      setAll('price-label', 'Набор'); setAll('price', 'закрыт'); setAll('full', '');
+      setAll('rise-label', 'Следующий поток'); setAll('rise', 'напишем в боте'); setAll('rise-line', 'набор закрыт');
+      var bar = document.getElementById('stickyCta'); if (bar) bar.remove();
+    } else {
+      setAll('price', rub(cur.crew));
+      setAll('full', full ? '' : rub(LADDER.crewFull));
+      if (next) { setAll('rise-label', 'Дорожает'); setAll('rise', dateRu(next.from)); setAll('rise-line', 'дорожает ' + dateRu(next.from)); }
+      else { setAll('rise-label', 'Набор до'); setAll('rise', dateRu(LADDER.closeDate)); setAll('rise-line', 'набор до ' + dateRu(LADDER.closeDate)); }
+    }
+
+    // _aid/_vcaid из ссылки бота идут дальше на страницу курса: без них корзина AWO заводит второго
+    // человека (оплата 20.09.2026 легла на новый контакт). UTM гайда остаются своими.
+    var q = new URLSearchParams(location.search), pass = [];
+    ['_aid', '_vcaid'].forEach(function (k) { if (q.get(k)) pass.push(k + '=' + encodeURIComponent(q.get(k))); });
+    if (pass.length) {
+      var links = document.querySelectorAll('a[href^="/launch/drum-and-bass-master"]');
+      for (var l = 0; l < links.length; l++) {
+        var h = links[l].getAttribute('href'), hashAt = h.indexOf('#');
+        var base = hashAt >= 0 ? h.slice(0, hashAt) : h, hash = hashAt >= 0 ? h.slice(hashAt) : '';
+        links[l].setAttribute('href', base + (base.indexOf('?') >= 0 ? '&' : '?') + pass.join('&') + hash);
+      }
+    }
+
+    // Полоса появляется после первого экрана и прячется, когда виден финальный оффер.
+    var sticky = document.getElementById('stickyCta');
+    if (sticky && 'IntersectionObserver' in window) {
+      var seen = {};
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { seen[e.target.id] = e.isIntersecting; });
+        var hide = !!(seen.top || seen.course);
+        sticky.setAttribute('data-hidden', hide ? 'true' : 'false');
+        sticky.setAttribute('aria-hidden', hide ? 'true' : 'false');
+        sticky.querySelector('a').tabIndex = hide ? -1 : 0;
+        document.body.setAttribute('data-cta', hide ? 'hidden' : 'visible');
+      }, { threshold: 0.05 });
+      ['top', 'course'].forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
+    }
+  })();
+</script>
+<script>
   // Цели по кликам на внешние ссылки - те же имена, что в src/lib/analytics.ts (18.09.2026).
+  // Плюс guide_cta: клик по любой кнопке гайда на страницу курса, в параметрах какая именно.
   document.addEventListener('click', function (e) {
     var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
     var h = a ? a.getAttribute('href') || '' : '';
     if (!h || !window.ym) return;
     var g = /ordering\/cart/.test(h) ? 'pay_click'
       : /form\/telegram|t\.me\/vaybpro_bot|t\.me\/vayb_psymaster_bot/.test(h) ? 'bot_click'
-      : /t\.me\/vayb_help/.test(h) ? 'ask_click' : null;
-    if (g) ym(112584610, 'reachGoal', g, {href: h, page: location.pathname});
+      : /t\.me\/vayb_help/.test(h) ? 'ask_click'
+      : a.getAttribute('data-cta') ? 'guide_cta' : null;
+    if (g) ym(112584610, 'reachGoal', g, {href: h, page: location.pathname, cta: a.getAttribute('data-cta') || undefined});
   }, true);
 </script>
 </body>
