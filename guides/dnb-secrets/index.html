@@ -290,6 +290,21 @@
   .bridge p { flex: 1 1 300px; margin: 0; font-size: 15px; line-height: 1.5; color: var(--muted); }
   .btn--sm { min-height: 42px; padding: 10px 18px; font-size: 11px; }
 
+  /* оффер до длинной технической части: читатель сразу понимает, куда ведёт гайд */
+  .offer-early { position: relative; z-index: 2; padding-block: clamp(30px, 4vw, 58px); background: linear-gradient(135deg, rgba(217,255,67,0.12), rgba(169,248,255,0.06)); border-block: 1px solid rgba(217,255,67,0.35); }
+  .offer-early__grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); gap: clamp(22px, 3vw, 46px); align-items: center; }
+  .offer-early h2 { max-width: 20ch; margin-bottom: 12px; font-size: clamp(26px, 3.2vw, 50px); }
+  .offer-early p { max-width: 60ch; margin-bottom: 0; color: var(--muted); }
+  .offer-early__card { padding: 20px; border: 1px solid var(--acid); background: rgba(5,5,5,.86); box-shadow: 6px 6px 0 rgba(217,255,67,.22); }
+  .offer-early__card span { display: block; margin-bottom: 7px; font-size: 10px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--acid); }
+  .offer-early__card strong { display: block; font-family: 'Unbounded', sans-serif; font-size: clamp(17px, 1.6vw, 24px); line-height: 1.25; }
+  .offer-early__card p { margin: 10px 0 18px; font-size: 14px; line-height: 1.45; }
+  .offer-early__meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 18px; }
+  .offer-early__meta div { padding: 10px; border: 1px solid var(--hair); background: rgba(244,240,232,.03); }
+  .offer-early__meta small { display: block; margin-bottom: 4px; font-size: 10px; color: rgba(244,240,232,.5); text-transform: uppercase; letter-spacing: .1em; }
+  .offer-early__meta b { font-size: 14px; color: var(--paper); }
+  @media (max-width: 760px) { .offer-early__grid { grid-template-columns: 1fr; } }
+
   /* липкая полоса: цена ступени и кнопка на курс, пока читаешь; плеер уезжает выше, чтобы не спорить с ней */
   .sticky-cta { position: fixed; z-index: 25; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: space-between; gap: 10px 16px; padding: 10px max(16px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); border-top: 2px solid var(--acid); background: rgba(5,5,5,0.94); backdrop-filter: blur(8px); transition: transform 260ms ease, visibility 0s linear 0s; }
   .sticky-cta[data-hidden="true"] { visibility: hidden; transform: translateY(110%); transition: transform 260ms ease, visibility 0s linear 260ms; }
@@ -447,6 +462,26 @@
           <figcaption>Dropping the bass</figcaption>
         </figure>
       </div>
+    </div>
+  </section>
+
+  <section class="offer-early" id="course" aria-label="Продолжение в Drum and Bass Master">
+    <div class="wrap offer-early__grid">
+      <div>
+        <span class="eyebrow eyebrow--cyan">Если хочется не только прочитать</span>
+        <h2>Собери свой DnB-трек вместе с нами</h2>
+        <p>Этот гайд даёт ориентиры. В Drum and Bass Master ты проходишь их на своём проекте: от ритма и баса до аранжировки, сведения и финальной версии трека.</p>
+      </div>
+      <aside class="offer-early__card">
+        <span>Поток с 1 октября</span>
+        <strong>Выбери маршрут под свой уровень</strong>
+        <p>Уже пишешь музыку - Crew Vibes с разборами в группе. Начинаешь с нуля - Big Start, где сначала собираешь базу, а затем проходишь Drum and Bass.</p>
+        <div class="offer-early__meta">
+          <div><small>Crew Vibes сейчас</small><b data-ladder="price">27 900 ₽</b></div>
+          <div><small data-ladder="rise-label">Дорожает</small><b data-ladder="rise">24 сентября</b></div>
+        </div>
+        <a class="btn btn--sm" data-cta="early" href="/launch/drum-and-bass-master?utm_source=guide&amp;utm_medium=dnb-secrets&amp;utm_campaign=dnb2&amp;utm_content=early">Посмотреть программу и цены</a>
+      </aside>
     </div>
   </section>
 
@@ -721,7 +756,7 @@
             <li>Выстраивай не драку, а диалог элементов</li>
             <li>Учись “обтёсывать”, “вытачивать” звук баса связкой “дисторшн-компрессор-эквалайзер”</li>
             <li>Используй короткий кик</li>
-            <li>Сайдчейни не только под кик, но и под снейр</li>
+            <li>Сайдчейни кик и снейр</li>
           </ol>
           <p style="margin-top:24px">И тогда у слушателя получится то самое ощущение:</p>
           <blockquote class="quote quote--cyan">«Что за тигр-легенда раздаёт на танцполе?!»</blockquote>
@@ -735,7 +770,7 @@
   </section>
 
   <!-- призыв: оффер потока, цена ступени считается скриптом по лесенке (LADDER ниже) -->
-  <section class="final" id="course">
+  <section class="final" id="offer-details">
     <img class="sticker" src="/stickers/crew.png" alt="" aria-hidden="true" style="--w:clamp(130px,15vw,270px);--r:-6deg;top:10%;right:2%">
     <div class="wrap">
       <span class="eyebrow">Drum and Bass Master · поток с 1 октября</span>
